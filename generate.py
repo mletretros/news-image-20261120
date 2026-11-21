@@ -14,51 +14,76 @@ GOLD, WHITE = "#E8B33A", "#FFFFFF"
 FONT_DIR = Path("/usr/share/fonts/truetype/dejavu")
 FONTS = {"serif": "DejaVuSerif-Bold.ttf", "bold": "DejaVuSans-Bold.ttf", "regular": "DejaVuSans.ttf"}
 
-# Transcribed from the supplied stories.txt, preserving every regional headline.
-# Embedding the brief keeps regeneration independent of external files or networks.
+# Headlines follow the supplied stories.txt. Decks are edited to fit a single
+# line while retaining a concrete detail from each story.
 STORIES = {
     "LEAD": [
-        ("Xi, Trump and Putin sign 'peace declaration'", "First US-China-Russia trilateral, 90 minutes in Shenzhen at APEC; declaration omits Ukraine and Iran wars."),
-        ("Russia strikes Kyiv bridges and rail stations", "One of its biggest air attacks, days after Ukraine badly damaged the Crimean (Kerch) Bridge; Putin vows a 'painful' response."),
+        ("Xi, Trump and Putin sign 'peace declaration'", "90 minutes at APEC. Pact omits Ukraine and Iran wars."),
+        ("Russia strikes Kyiv bridges and rail stations", "After the Kerch strike, Putin vows a ‘painful’ response."),
     ],
     "EUROPE": [
-        ("UK and EU close to post-Brexit deal", "100,000 youth-mobility cap agreed; Burnham says it 'is for you', Badenoch calls it unfair."),
-        ("Russian missiles and drones hit Poland", "Stray strikes during attacks on Ukraine raise NATO alarm."),
-        ("Cost-of-living protests sweep Europe", "Thousands marched across European cities on Friday."),
-        ("French police sentenced over Michel Zecler beating", "Court finds racist assault on the Black music producer."),
-        ("Denmark expels Russian diplomat", "Alleged Moscow link to an attempted killing of a rapper."),
-        ("Spain frees US-sought activist on bail", "Irish police raid a Dublin home in the same case."),
+        ("UK and EU close to post-Brexit deal", "Youth mobility capped at 100,000."),
+        ("Russian missiles and drones hit Poland", "Stray strikes raise alarm within NATO."),
+        ("Cost-of-living protests sweep Europe", "Thousands march across European cities."),
+        ("French police sentenced over Michel Zecler beating", "Court finds racist assault on music producer."),
+        ("Denmark expels Russian diplomat", "Moscow linked to alleged plot to kill a rapper."),
+        ("Spain frees US-sought activist on bail", "Irish police raid a Dublin home in the case."),
     ],
     "MIDDLE EAST": [
-        ("Trump warns over any Iranian plot against Washington", "US taking it 'very seriously'; Tehran rejects any such plan."),
-        ("Houthi advance in Yemen threatens global economy", "Iran-backed rebels besiege a city; Red Sea shipping at risk."),
+        ("Trump warns over any Iranian plot against Washington", "Tehran denies any such plan."),
+        ("Houthi advance in Yemen threatens global economy", "Rebel siege puts Red Sea shipping at risk."),
+        ("Iraqi protesters rally against the government", "Iraqi flags fly amid fresh unrest."),
     ],
     "ASIA": [
-        ("Myanmar committed genocide against Rohingya, ICJ rules", "Unprecedented International Court of Justice ruling; refugees cheer."),
-        ("China issues Mount Fuji warning", "Family of a missing climber offers a $75,000 reward."),
-        ("China gives Japan PM frosty welcome at APEC", "Fanfare for other leaders contrasts with the snub."),
-        ("Philippines pet cremation scandal", "Dead pets meant to be cremated appeared on a livestream."),
+        ("Myanmar committed genocide against Rohingya, ICJ rules", "Refugees cheer the landmark ruling."),
+        ("China issues Mount Fuji warning", "$75,000 reward to find a missing climber."),
+        ("China gives Japan PM frosty welcome at APEC", "Other leaders receive a warmer welcome."),
+        ("Philippines pet cremation scandal", "Pets awaiting cremation shown on livestream."),
+        ("Cumin-laced sodas challenge cola giants in India", "Local flavours gain market share."),
     ],
     "AFRICA": [
-        ("ANC fights to keep South Africa's key cities", "Election setback threatens control of major metros."),
-        ("US consortium wins huge Kenya mining deal", "Mrima Hill site, beating Chinese rivals."),
-        ("Springboks face Ireland without Erasmus", "Defiant Boks prepare for the test."),
+        ("ANC fights to keep South Africa's key cities", "Election setback threatens control of metros."),
+        ("US consortium wins huge Kenya mining deal", "US group beats Chinese rivals for Mrima Hill."),
+        ("Springboks face Ireland without Erasmus", "South Africa prepares for the rugby test."),
     ],
     "AMERICAS": [
-        ("Venezuela signs military deal with US", "Less than a year after Maduro's removal."),
-        ("Mexican drug lord Felix Gallardo dies at 80", "The 'Boss of Bosses' of the Guadalajara cartel."),
+        ("Venezuela signs military deal with US", "Deal follows Maduro’s removal."),
+        ("Mexican drug lord Felix Gallardo dies at 80", "He led the Guadalajara cartel."),
         ("Wife of slain ex-Haiti leader registers for presidency", "First election since the assassination."),
-        ("Botched Texas prison execution", "Onlookers say it was like nothing they had seen."),
-        ("Trump turns press conference into 2028 audition", "Succession talk dominates the White House event."),
-        ("Senator blocks Trump cyber nominee", "Over January 6 denial; cyber director ousted after tech outages."),
-        ("California probes Nvidia over China AI chips", "Follows Jensen Huang's departure."),
-        ("Anthropic hits $2tn in stock debut", "Record AI listing draws protests in New York and San Francisco."),
+        ("Botched Texas prison execution", "Witnesses call it unlike anything they’d seen."),
+        ("Trump turns press conference into 2028 audition", "Succession talk dominates the event."),
+        ("Senator blocks Trump cyber nominee", "Nominee’s January 6 denial draws opposition."),
+        ("California probes Nvidia over China AI chips", "Probe follows Jensen Huang’s departure."),
+        ("Anthropic hits $2tn in stock debut", "Listing draws protests in New York and SF."),
+        ("Fired White House press secretary faces bar probe", "California bar investigates Katie Zacharia."),
+        ("Huge waves batter Pacifica promenade", "Storm sends surf over the coastal walkway."),
+    ],
+    "OCEANIA": [
+        ("Arson attack destroys Melbourne shop", "Police investigate the fire."),
+        ("Mount Pleasant thermal coalmine under scrutiny", "Australian mine faces environmental pressure."),
     ],
     "GLOBAL": [
-        ("Race for UN secretary general exposes divisions", "UK and France believed to have vetoed the UAE choice."),
+        ("Race for UN secretary general exposes divisions", "UK and France may have vetoed UAE pick."),
         ("Pancreatic cancer pill hailed as breakthrough", "Called the biggest advance in decades."),
+        ("Striking snakes released into the wild", "Release aims to save an at-risk species."),
     ],
 }
+
+HEADLINE_SIZE = 13.5
+DECK_SIZE = 12
+LEADING = 1.25
+CARD_HEADER = 40
+CARD_BOTTOM = 12
+CARD_GAP = 10
+CARD_INSET = 12
+MIN_ITEM_GAP = 20
+MAX_ITEM_GAP = 24
+# Give the ten-story Americas card more measure to reduce headline wraps.
+COLUMNS = (
+    (304, ("EUROPE", "ASIA")),
+    (296, ("MIDDLE EAST", "AFRICA", "GLOBAL")),
+    (360, ("AMERICAS", "OCEANIA")),
+)
 
 
 @lru_cache(maxsize=None)
@@ -72,7 +97,8 @@ class FrontPage:
         self.draw = ImageDraw.Draw(self.image)
         self.text_bounds = []
         self.shown = []
-        self.region_fonts = {}
+        self.story_type = []
+        self.column_metrics = []
 
     def rectangle(self, box, fill, outline=None, width=1):
         self.draw.rectangle(tuple(round(n * SCALE) for n in box), fill=fill,
@@ -102,7 +128,7 @@ class FrontPage:
                 current = candidate
         return lines + ([current] if current else [])
 
-    def measure(self, lines, size, style, leading=1.18):
+    def measure(self, lines, size, style, leading=LEADING):
         if not lines:
             return 0
         glyph_height = max(self.draw.textbbox((0, 0), line, font=font(size, style), anchor="lt")[3]
@@ -123,13 +149,13 @@ class FrontPage:
         lines, fitted = self.fit(text, width, height, size, style, max_lines, minimum)
         for i, line in enumerate(lines):
             dx = (width - self.width(line, fitted, style)) / 2 if align == "center" else 0
-            xy = ((x + dx) * SCALE, (y + i * fitted * 1.18) * SCALE)
+            xy = ((x + dx) * SCALE, (y + i * fitted * LEADING) * SCALE)
             bounds = self.draw.textbbox(xy, line, font=font(fitted, style), anchor="lt")
             assert bounds[0] >= x * SCALE - 1 and bounds[2] <= (x + width) * SCALE + 1
             assert bounds[1] >= y * SCALE - 1 and bounds[3] <= (y + height) * SCALE + 1
             self.text_bounds.append(tuple(n / SCALE for n in bounds))
             self.draw.text(xy, line, font=font(fitted, style), fill=color, anchor="lt")
-        return self.measure(lines, fitted, style)
+        return fitted
 
     def star(self, x, y, radius, color=GOLD):
         self.polygon([(x + cos(-pi / 2 + i * pi / 5) * radius * (1 if i % 2 == 0 else .42),
@@ -177,80 +203,75 @@ class FrontPage:
                       (x + 60, y + 10), (x + 65, y + 37), (x + 56, y + 45)], GOLD)
 
     def lead(self, index, x, y, width):
-        headline, _ = STORIES["LEAD"][index]
+        headline, deck = STORIES["LEAD"][index]
         self.text("APEC / DIPLOMACY" if index == 0 else "UKRAINE / ESCALATION",
-                  (x, y, width, 14), 10.5, "bold", RED, max_lines=1)
-        (self.flags if index == 0 else self.bridge)(x + 2, y + 24)
-        self.text(headline, (x + 99, y + 23, width - 99, 55), 22, "bold", max_lines=2, minimum=17)
-        caption = ("90 minutes at APEC; declaration omits Ukraine and Iran wars." if index == 0 else
-                   "After the Kerch Bridge attack, Putin vows a 'painful' response.")
-        self.text(caption, (x + 99, y + 86, width - 99, 18), 13, color=GREY, max_lines=1, minimum=10)
+                  (x + 98, y, width - 98, 14), 11, "bold", RED, max_lines=1)
+        (self.flags if index == 0 else self.bridge)(x + 3, y + 2)
+        head_size = self.text(headline, (x + 98, y + 20, width - 98, 55),
+                              24, "bold", minimum=23)
+        deck_size = self.text(deck, (x + 98, y + 77, width - 98, 15),
+                              13, color=GREY, max_lines=1, minimum=12)
         self.shown.append(headline)
+        self.story_type.append((head_size, deck_size))
 
-    def region(self, label, box):
-        x, y, width, height = box
-        items = STORIES[label]
-        self.rectangle((x, y, x + width, y + height), WHITE, INK, .7)
-        self.rectangle((x, y, x + width, y + 3), RED)
-        self.text(label, (x + 13, y + 13, width - 65, 22), 15, "bold", RED, max_lines=1)
-        self.text(f"{len(items):02d}", (x + width - 37, y + 15, 24, 18), 11, "bold", GREY, max_lines=1)
-        self.line([(x + 13, y + 40), (x + width - 13, y + 40)], INK, .6)
-        inner_width = width - 26
-        available = height - 65
-        # Start with every caption. Remove caption lines evenly before shrinking
-        # headlines, keeping all stories and a six-pixel inter-brief gutter.
-        for headline_size in (13, 12.5, 12, 11.5, 11):
-            heads = [self.fit(h, inner_width, 40, headline_size, "bold", 2, headline_size)[0] for h, _ in items]
-            head_heights = [self.measure(lines, headline_size, "bold") for lines in heads]
-            for caption_limit in (3, 2, 1, 0):
-                captions = [self.wrap(c, inner_width, 11, "regular") for _, c in items]
-                # Captions are included whole or omitted; never silently truncated.
-                captions = [lines if len(lines) <= caption_limit else [] for lines in captions]
-                heights = [hh + (5 + self.measure(cc, 11, "regular") if cc else 0)
-                           for hh, cc in zip(head_heights, captions)]
-                total = sum(heights) + (len(items) - 1) * 13
-                if total <= available:
-                    break
-            else:
-                continue
-            break
-        else:
-            raise ValueError(f"Regional card cannot fit all stories: {label}")
-        self.region_fonts[label] = headline_size
-        cursor = y + 51
-        # A little extra leading is useful in sparse regions without creating
-        # giant empty cells; dense regions retain the exact minimum gutter.
-        gap = 13 + min(18, (available - total) / max(1, len(items) - 1))
-        for i, ((headline, caption), hh, cc, item_height) in enumerate(zip(items, head_heights, captions, heights)):
-            self.text(headline, (x + 13, cursor, inner_width, hh + .4), headline_size,
-                      "bold", max_lines=2, minimum=headline_size)
-            if cc:
-                self.text(caption, (x + 13, cursor + hh + 5, inner_width,
-                                   self.measure(cc, 11, "regular") + .4), 11,
-                          color=GREY, max_lines=3, minimum=11)
-            self.shown.append(headline)
-            cursor += item_height
-            assert cursor <= y + height - 13, (label, headline, cursor)
-            if i < len(items) - 1:
-                self.line([(x + 13, cursor + gap / 2), (x + width - 13, cursor + gap / 2)], GREY, .35)
-                cursor += gap
+    def brief_heights(self, headline, deck, width):
+        lines, _ = self.fit(headline, width, 48, HEADLINE_SIZE, "bold", 3, HEADLINE_SIZE)
+        deck_lines, _ = self.fit(deck, width, 16, DECK_SIZE, max_lines=1, minimum=DECK_SIZE)
+        return self.measure(lines, HEADLINE_SIZE, "bold"), self.measure(deck_lines, DECK_SIZE, "regular")
+
+    def region_column(self, labels, x, top, width, bottom):
+        inner_width = width - 2 * CARD_INSET
+        cards = [(label, [self.brief_heights(*story, inner_width) for story in STORIES[label]])
+                 for label in labels]
+        separators = sum(len(rows) - 1 for _, rows in cards)
+        fixed = (CARD_HEADER + CARD_BOTTOM) * len(cards) + CARD_GAP * (len(cards) - 1)
+        fixed += sum(h + 4 + d for _, rows in cards for h, d in rows)
+        gap = (bottom - top - fixed) / separators
+        if not MIN_ITEM_GAP <= gap <= MAX_ITEM_GAP:
+            raise ValueError(f"Column {labels} needs a {gap:.1f}px item gap to fill {bottom - top}px")
+        y = top
+        for label, rows in cards:
+            height = CARD_HEADER + CARD_BOTTOM + sum(h + 4 + d for h, d in rows) + gap * (len(rows) - 1)
+            self.rectangle((x, y, x + width, y + height), WHITE, INK, .7)
+            self.rectangle((x, y, x + width, y + 2), RED)
+            left, right = x + CARD_INSET, x + width - CARD_INSET
+            self.text(label, (left, y + 10, inner_width, 18), 16, "bold", RED, max_lines=1)
+            self.line([(left, y + 30), (right, y + 30)], INK, .6)
+            cursor = y + CARD_HEADER
+            for i, ((headline, deck), (head_h, deck_h)) in enumerate(zip(STORIES[label], rows)):
+                head_size = self.text(headline, (left, cursor, inner_width, head_h + .4),
+                                      HEADLINE_SIZE, "bold", max_lines=3, minimum=HEADLINE_SIZE)
+                cursor += head_h + 4
+                deck_size = self.text(deck, (left, cursor, inner_width, deck_h + .4),
+                                      DECK_SIZE, color=GREY, max_lines=1, minimum=DECK_SIZE)
+                cursor += deck_h
+                self.shown.append(headline)
+                self.story_type.append((head_size, deck_size))
+                if i < len(rows) - 1:
+                    self.line([(left, cursor + gap / 2), (right, cursor + gap / 2)], GREY, .45)
+                    cursor += gap
+            assert abs(y + height - cursor - CARD_BOTTOM) < .01, label
+            y += height + CARD_GAP
+        assert abs(y - CARD_GAP - bottom) < .01
+        self.column_metrics.append(gap / 2)
 
     def render(self):
         self.text("THE WORLD TODAY", (24, 24, 976, 57), 46, "serif", max_lines=1, align="center")
-        self.text("GLOBAL EDITION · WORLD NEWS BRIEFING", (24, 83, 976, 15),
+        self.text("GLOBAL EDITION · WORLD NEWS BRIEFING", (24, 69, 976, 15),
                   10.5, color=GREY, max_lines=1, align="center")
-        self.line([(24, 105), (1000, 105)], INK, 2)
-        self.line([(24, 110), (1000, 110)], INK, .6)
-        self.text("FRIDAY · 20 NOVEMBER 2026", (24, 121, 976, 32),
+        self.line([(24, 86), (1000, 86)], INK, 2)
+        self.line([(24, 91), (1000, 91)], INK, .6)
+        self.text("FRIDAY · 20 NOVEMBER 2026", (24, 100, 976, 28),
                   24, "bold", RED, max_lines=1, align="center")
-        self.line([(24, 161), (1000, 161)], INK, .6)
-        self.lead(0, 24, 173, 476)
-        self.lead(1, 524, 173, 476)
-        self.line([(512, 173), (512, 280)], GREY, .5)
-        self.line([(24, 284), (1000, 284)], INK, 1.5)
-        regions = ("EUROPE", "MIDDLE EAST", "ASIA", "AFRICA", "AMERICAS", "GLOBAL")
-        for i, region in enumerate(regions):
-            self.region(region, (24 + (i % 3) * 330, 297 + (i // 3) * 343, 316, 330))
+        self.line([(24, 130), (1000, 130)], INK, .6)
+        self.lead(0, 24, 141, 476)
+        self.lead(1, 524, 141, 476)
+        self.line([(512, 140), (512, 232)], GREY, .5)
+        self.line([(24, 239), (1000, 239)], INK, 1.5)
+        x = 24
+        for width, labels in COLUMNS:
+            self.region_column(labels, x, 249, width, 973)
+            x += width + 8
         self.rectangle((24, 983, 1000, 1006), INK)
         self.text("Sources: BBC, The Guardian · 20 Nov 2026", (34, 989, 700, 13),
                   10, color=WHITE, max_lines=1)
@@ -258,7 +279,7 @@ class FrontPage:
                   10, "bold", WHITE, max_lines=1, align="center")
         expected = [headline for group in STORIES.values() for headline, _ in group]
         assert sorted(self.shown) == sorted(expected), "Missing or duplicated news stories"
-        assert len(self.shown) == 27
+        assert len(self.shown) == len(self.story_type) == 34
         # Check actual glyph rectangles, including lines in different text blocks.
         for i, a in enumerate(self.text_bounds):
             for b in self.text_bounds[i + 1:]:
@@ -278,7 +299,9 @@ def main():
     assert byte_count < 1_048_576, f"PNG exceeds size budget: {byte_count}"
     print(f"entry.png: 1024x1024 PNG, {byte_count:,} bytes; {len(page.shown)} stories")
     print("All headlines present; glyph bounds and non-overlap checks passed.")
-    print("Regional headline sizes:", page.region_fonts)
+    head_min, deck_min = map(min, zip(*page.story_type))
+    print(f"Minimum type: {head_min:g}px headlines, {deck_min:g}px decks")
+    print("Padding on each side of separators:", [round(n, 1) for n in page.column_metrics])
 
 
 if __name__ == "__main__":
